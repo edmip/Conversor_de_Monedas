@@ -23,50 +23,65 @@ public class Main {
 
         do  {
             ////////  ELIGIENDO LA PTRIMERA MONEJDA  //////////
-            try {
-            new Mensajes().mensajeElegir();
-            int numeroMonedaElegida1 = miScaner.nextInt();
-            if(numeroMonedaElegida1 == 0){
-                System.out.println("USTED HA ELEGIDO SALIR DEL SISTEMA");
-                break;
-            }
+
+            try {//TRY PARA MANEJAR EXCEPCIONES DEL ARRAY
+                new Mensajes().mensajeElegir();
+                int numeroMonedaElegida1 = miScaner.nextInt();
+                if(numeroMonedaElegida1 == 0){
+                    System.out.println("USTED HA ELEGIDO SALIR DEL SISTEMA");
+                    break;
+                }
                 moneda1 = Monedas.values()[numeroMonedaElegida1 - 1];
 
 
-            ////////  ELIGIENDO LA PTRIMERA MONEJDA  //////////
-            new Mensajes().mensajeElegir2();
-            int numeroMonedaElegida2 = miScaner.nextInt();
-            if(numeroMonedaElegida2 == 0){
-                System.out.println("USTED HA ELEGIDO SALIR DEL SISTEMA");
-                break;
-            }
+                ////////  ELIGIENDO LA PTRIMERA MONEJDA  //////////
+                new Mensajes().mensajeElegir2();
+                int numeroMonedaElegida2 = miScaner.nextInt();
+                if(numeroMonedaElegida2 == 0){
+                    System.out.println("USTED HA ELEGIDO SALIR DEL SISTEMA");
+                    break;
+                }
 
 
                 moneda2 = Monedas.values()[numeroMonedaElegida2 - 1];
+
             }catch (ArrayIndexOutOfBoundsException | InputMismatchException e){
+
                 System.out.println("USTED HA ELEGIDO UNA OPCION NO VALIDA, EL PROGRAMA FINALIZARÁ");
                 break;
             }
 
-            ConsultaMoneda miConsulta = new ConsultaMoneda();
-            miMoneda = miConsulta.consultaMoneda(moneda1);
+            try {
+
+                ConsultaMoneda miConsulta = new ConsultaMoneda();
+                miMoneda = miConsulta.consultaMoneda(moneda1);
+
+            }catch (RuntimeException e){
+
+                System.out.println(e.getMessage());
+                System.out.println("FINALIZANDO LA APLICACION");
+                break;
+
+            }
+
 
             new Mensajes().mensajeCantMonedas(moneda1.toString());
             cantidadMonedas = miScaner.nextDouble();
 
 
-        // Analizar el JSON y convertirlo en un objeto JsonObject
-        JsonParser parser = new JsonParser();
-        JsonObject jsonObject = parser.parse(miMoneda).getAsJsonObject();
-        JsonObject conversionRates = jsonObject.getAsJsonObject("conversion_rates");
+            // Analizar el JSON y convertirlo en un objeto JsonObject
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObject = parser.parse(miMoneda).getAsJsonObject();
+            JsonObject conversionRates = jsonObject.getAsJsonObject("conversion_rates");
 
-        // Acceder a las propiedades del objeto JSON
-        double monedaCambio2 = conversionRates.get((moneda2.toString())).getAsDouble();
+            // Acceder a las propiedades del objeto JSON
+            double monedaCambio2 = conversionRates.get((moneda2.toString())).getAsDouble();
 
-        double miCalculo = new Calculo().calculo(cantidadMonedas, monedaCambio2);
+            double miCalculo = new Calculo().calculo(cantidadMonedas, monedaCambio2);
 
-        // Imprimir las propiedades
-        System.out.println("EL VALOR DE " + cantidadMonedas + " " + moneda1 + " A " + moneda2 + " ES DE " + df.format(miCalculo));
-    }while (obcionSalida);
+            // Imprimir el resultado
+            System.out.println("EL VALOR DE " + cantidadMonedas + " [" + moneda1 + "], CORRESPONDE AL VALOR FINAL DE ---> "
+                    + df.format(miCalculo) + " [" +moneda2 + "].");
+        }while (obcionSalida);
     }
 }

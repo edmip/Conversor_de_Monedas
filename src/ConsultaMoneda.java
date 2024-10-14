@@ -1,6 +1,3 @@
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,16 +19,16 @@ public class ConsultaMoneda {
                 .uri(URI.create(URL))
                 .build();
 
-        HttpResponse<String> response = null;
+
         try {
-            response = client
-                    .send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String Json = response.body();
+            return Json;
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        String Json = response.body();
-         return Json;
+
 
 
     }
