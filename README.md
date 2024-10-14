@@ -18,8 +18,18 @@ Bienvenido al Conversor de Monedas. Este programa permite convertir cantidades e
 
 ### Ejecutar el programa:
 - Corre el programa desde tu IDE.
-- Introduce la cantidad de dinero en dólares que deseas convertir.
+- Seleccione la moneda base.
+  
+  ![CONVERSOR 1](https://github.com/user-attachments/assets/deb35387-6549-4341-8785-496722e505db)
+
 - Selecciona la moneda a la que deseas convertir de una lista de opciones.
+  
+  ![CONVERSOR 2](https://github.com/user-attachments/assets/ccc32fb0-9297-4b70-ab1a-cec13e22d2ee)
+
+- Introduce la cantidad de dinero en dólares que deseas convertir.
+  
+![CONVERSOR 3](https://github.com/user-attachments/assets/e0734692-3f5f-4bec-9789-bbcb4ed83d70)
+
 
 ### Resultados:
 - El programa mostrará el monto convertido basado en la tasa de cambio actual.
