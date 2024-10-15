@@ -1,4 +1,7 @@
+import java.text.DecimalFormat;
+
 public class Mensajes {
+    DecimalFormat df = new DecimalFormat("#.00");
 
     public void mensajeBienvenida() {
         String mensaje = "\n" +
@@ -64,6 +67,13 @@ public class Mensajes {
 
     public void mensajeCantMonedas(String nombreMoneda) {
         String mensaje = "\nINSERTE LA CANTIDAD DE " + nombreMoneda + " A CONVERTIR";
+
+        System.out.println(mensaje);
+    }
+
+    public void mensajeImprimirResultado(double cantidadMonedas, String moneda1, double miCalculo , String moneda2) {
+        String mensaje = "\nEL VALOR DE " + cantidadMonedas + " [" + moneda1 + "], CORRESPONDE AL VALOR FINAL DE ---> " +
+                df.format(miCalculo) + " [" +moneda2 + "].\n";
 
         System.out.println(mensaje);
     }
